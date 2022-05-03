@@ -1,6 +1,7 @@
 package internal
 
 type PeopleRepo interface {
+	GetPerson(id int) (Person, error)
 	GetPeople() ([]Person, error)
 }
 

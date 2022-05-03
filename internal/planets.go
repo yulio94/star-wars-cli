@@ -1,16 +1,21 @@
 package internal
 
+type PlanetRepo interface {
+	GetPlanet(id int) (Planet, error)
+	GetPlanets() ([]Planet, error)
+}
+
 type Planet struct {
-	Name           string
-	RotationPeriod int
-	OrbitalPeriod  int
-	Diameter       int
-	Climate        string
-	Gravity        string
-	Terrain        string
-	SurfaceWater   int
-	Population     int
-	Films          []string
+	Name           string   `json:"name"`
+	RotationPeriod int      `json:"rotation_period"`
+	OrbitalPeriod  int      `json:"orbital_period"`
+	Diameter       int      `json:"diameter"`
+	Climate        string   `json:"climate"`
+	Gravity        string   `json:"gravity"`
+	Terrain        string   `json:"terrain"`
+	SurfaceWater   int      `json:"surface_water"`
+	Population     int      `json:"population"`
+	Films          []string `json:"films"`
 }
 
 func NewPlanet(name string, rotationPeriod int, orbitalPeriod int, diameter int, climate string, gravity string, terrain string, surfaceWater int, population int, films []string) (p Planet) {
