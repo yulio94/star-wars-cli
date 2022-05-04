@@ -123,7 +123,7 @@ func (r *swapiPlanetsRepo) GetPlanets() (planets []internal.Planet, err error) {
 	return
 }
 
-func (r swapiStarshipsRepo) GetStarship(id int) (starship internal.Starship, err error) {
+func (r *swapiStarshipsRepo) GetStarship(id int) (starship internal.Starship, err error) {
 	response, err := http.Get(fmt.Sprintf("%v%v/%v", r.url, starshipsEndpoint, id))
 
 	if err != nil {
@@ -143,7 +143,7 @@ func (r swapiStarshipsRepo) GetStarship(id int) (starship internal.Starship, err
 	return
 }
 
-func (r swapiStarshipsRepo) GetStarships() (starships []internal.Starship, err error) {
+func (r *swapiStarshipsRepo) GetStarships() (starships []internal.Starship, err error) {
 	response, err := http.Get(fmt.Sprintf("%v%v", r.url, starshipsEndpoint))
 
 	if err != nil {

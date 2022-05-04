@@ -1,9 +1,11 @@
 package cli
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/yulio94/star-wars-cli/internal"
 	"log"
+	"strconv"
 )
 
 func InitPeopleCmd(repository internal.PeopleRepo) (peopleCmd *cobra.Command) {
@@ -23,11 +25,29 @@ func runPeopleFn(repository internal.PeopleRepo) CobraFn {
 	return func(cmd *cobra.Command, args []string) {
 		fileName := ""
 
-		givenFileName, _ := cmd.Flags().GetString("filename")
+		givenId, _ := cmd.Flags().GetString(id)
+		if givenId != "" {
+			id, _ := strconv.Atoi(givenId)
+			values, err := repository.GetPerson(id)
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			fmt.Println(values)
+		} else {
+			values, err := repository.GetPeople()
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			fmt.Println(values)
+		}
+
+		givenFileName, _ := cmd.Flags().GetString("fileName")
 		if givenFileName != "" {
 			fileName = givenFileName
 		}
 
-		log.Fatal(repository.SaveFile(fileName))
+		fmt.Println("File fileName: ", fileName)
 	}
 }

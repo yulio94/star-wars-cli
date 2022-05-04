@@ -20,6 +20,6 @@ const (
 	fileShort     = "f"
 	fileUsage     = "file to read from"
 	fileName      = "fileName"
-	fileNameShort = "fn"
+	fileNameShort = "n"
 	fileNameUsage = "Name to use in the csv file."
 )

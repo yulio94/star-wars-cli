@@ -7,18 +7,18 @@ type PlanetRepo interface {
 
 type Planet struct {
 	Name           string   `json:"name"`
-	RotationPeriod int      `json:"rotation_period"`
-	OrbitalPeriod  int      `json:"orbital_period"`
-	Diameter       int      `json:"diameter"`
+	RotationPeriod string   `json:"rotation_period"`
+	OrbitalPeriod  string   `json:"orbital_period"`
+	Diameter       string   `json:"diameter"`
 	Climate        string   `json:"climate"`
 	Gravity        string   `json:"gravity"`
 	Terrain        string   `json:"terrain"`
-	SurfaceWater   int      `json:"surface_water"`
-	Population     int      `json:"population"`
+	SurfaceWater   string   `json:"surface_water"`
+	Population     string   `json:"population"`
 	Films          []string `json:"films"`
 }
 
-func NewPlanet(name string, rotationPeriod int, orbitalPeriod int, diameter int, climate string, gravity string, terrain string, surfaceWater int, population int, films []string) (p Planet) {
+func NewPlanet(name string, rotationPeriod string, orbitalPeriod string, diameter string, climate string, gravity string, terrain string, surfaceWater string, population string, films []string) (p Planet) {
 	p = Planet{
 		Name:           name,
 		RotationPeriod: rotationPeriod,

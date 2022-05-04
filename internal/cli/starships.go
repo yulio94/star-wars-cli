@@ -1,17 +1,18 @@
 package cli
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	"github.com/yulio94/star-wars-cli/internal"
 	"log"
 	"strconv"
 )
 
-func InitStarshipsCmd(starshipsRepo internal.StarshipsRepo, storageRepo storage.Repo) (peopleCmd *cobra.Command) {
+func InitStarshipsCmd(starshipsRepo internal.StarshipsRepo) (peopleCmd *cobra.Command) {
 	peopleCmd = &cobra.Command{
 		Use:   "starships",
 		Short: "Star Wars starships",
-		Run:   runStarshipsFn(starshipsRepo, storageRepo),
+		Run:   runStarshipsFn(starshipsRepo),
 	}
 
 	peopleCmd.Flags().StringP(id, idShort, "", idUsage)
@@ -20,23 +21,33 @@ func InitStarshipsCmd(starshipsRepo internal.StarshipsRepo, storageRepo storage.
 	return
 }
 
-func runStarshipsFn(starshipsRepo internal.StarshipsRepo, storageRepo storage.Repo) CobraFn {
+func runStarshipsFn(starshipsRepo internal.StarshipsRepo) CobraFn {
 	return func(cmd *cobra.Command, args []string) {
-		name := ""
+		fileName := ""
 
 		givenId, _ := cmd.Flags().GetString(id)
 		if givenId != "" {
 			id, _ := strconv.Atoi(givenId)
 			values, err := starshipsRepo.GetStarship(id)
-			log.Fatal(storageRepo.Save(values, name))
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			fmt.Println(values)
 		} else {
 			values, err := starshipsRepo.GetStarships()
-			log.Fatal(storageRepo.Save(values, name))
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			fmt.Println(values)
 		}
 
 		givenFileName, _ := cmd.Flags().GetString("fileName")
 		if givenFileName != "" {
-			name = givenFileName
+			fileName = givenFileName
 		}
+
+		fmt.Println("File fileName: ", fileName)
 	}
 }

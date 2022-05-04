@@ -7,9 +7,9 @@ type PeopleRepo interface {
 
 type Person struct {
 	Name      string   `json:"name"`
-	Age       int      `json:"age"`
-	Height    float32  `json:"height"`
-	Mass      float32  `json:"mass"`
+	Age       string   `json:"age"`
+	Height    string   `json:"height"`
+	Mass      string   `json:"mass"`
 	HairColor string   `json:"hair_color"`
 	EyeColor  string   `json:"eye_color"`
 	BirthYear string   `json:"birth_year"`
@@ -18,7 +18,7 @@ type Person struct {
 	Films     []string `json:"films"`
 }
 
-func NewPerson(name string, age int, height float32, mass float32, hairColor string, eyeColor string, birthYear string, gender string, homeWorld string, films []string) (p Person) {
+func NewPerson(name string, age string, height string, mass string, hairColor string, eyeColor string, birthYear string, gender string, homeWorld string, films []string) (p Person) {
 	p = Person{
 		Name:      name,
 		Age:       age,
